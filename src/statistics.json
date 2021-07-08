@@ -1,0 +1,64 @@
+{
+  "transactions_current_datetime": [
+    {
+      "alertId": "ICA260120211",
+      "transactionId": "260120211",
+      "executionEntityName": "AAWDW64954",
+      "instrumentName": "EX0345934354",
+      "instrumentClassification": "EXMKFG",
+      "quantity": 11,
+      "price": 56.53,
+      "currency": "",
+      "datestamp": "26-01-2021 21:10:23",
+      "netAmount": 456.33
+    },
+    {
+      "alertId": "PPA260120211",
+      "transactionId": "260120212",
+      "executionEntityName": "BBVHV23951",
+      "instrumentName": "EX0345934354",
+      "instrumentClassification": "EXMKFG",
+      "quantity": 55,
+      "price": 12.24,
+      "currency": "EU",
+      "datestamp": "26-01-2021 21:10:23",
+      "netAmount": 65657.65
+    },
+    {
+      "alertId": "ICA260120211",
+      "transactionId": "260120213",
+      "executionEntityName": "CCLSL13746",
+      "instrumentName": "EX0345934354",
+      "instrumentClassification": "EXMKFG",
+      "quantity": 478,
+      "price": 10.84,
+      "currency": "EU",
+      "datestamp": "26-01-2021 21:10:23",
+      "netAmount": 65657.65
+    },
+    {
+      "alertId": "PPA260120211",
+      "transactionId": "260120214",
+      "executionEntityName": "DDPHN18592",
+      "instrumentName": "EX0345934354",
+      "instrumentClassification": "EXMKFG",
+      "quantity": 375,
+      "price": 15.54,
+      "currency": "EU",
+      "datestamp": "26-01-2021 21:10:23",
+      "netAmount": 65657.65
+    },
+    {
+      "alertId": "ICA260120211",
+      "transactionId": "260120215",
+      "executionEntityName": "EEONX12953",
+      "instrumentName": "EX0345934354",
+      "instrumentClassification": "EXMKFG",
+      "quantity": 168,
+      "price": 33.23,
+      "currency": "EU",
+      "datestamp": "26-01-2021 21:10:23",
+      "netAmount": 65657.65
+    }
+  ]
+}

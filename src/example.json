@@ -1,0 +1,42 @@
+{
+  "alerts_datestamp": [
+    {
+      "alertId": "ICA260120211",
+      "alertType": "ICA",
+      "description": "Currency field is incorrect for the combination of AAWDW64954 and EX0345934354",
+      "affectedTransactionsCount": 2
+    },
+    {
+      "alertId": "PPA260120211",
+      "alertType": "PPA",
+      "description": "Potential pumping price activity has been noticed for the following combination of <Execution Entity Name>, <Instrument Name> and <Currency> where an average price is greater than previous more than 50% and is <Current percent>",
+      "affectedTransactionsCount": 10
+    }
+  ],
+  "transactions_current_datetime": [
+    {
+      "alertId": "ICA260120211",
+      "transactionId": "260120211",
+      "executionEntityName": "AAWDW64954",
+      "instrumentName": "EX0345934354",
+      "instrumentClassification": "EXMKFG",
+      "quantity": 11,
+      "price": 56.53,
+      "currency": "",
+      "datestamp": "26-01-2021 21:10:23",
+      "netAmount": 456.33
+    },
+    {
+      "alertId": "ICA260120211",
+      "transactionId": "260120212",
+      "executionEntityName": "AAWDW64954",
+      "instrumentName": "EX0345934354",
+      "instrumentClassification": "EXMKFG",
+      "quantity": 556,
+      "price": 12.24,
+      "currency": "EU",
+      "datestamp": "26-01-2021 21:10:23",
+      "netAmount": 65657.65
+    }
+  ]
+}
