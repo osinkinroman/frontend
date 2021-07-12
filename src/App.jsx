@@ -28,7 +28,7 @@ class App extends React.Component {
       alerts_datestamp: await fetchAlerts(),
     });
     let reducer = [];
-    this.state.alerts_datestamp.map((item) => {
+    this.state.alerts_datestamp.forEach((item) => {
       fetchTransactions(item.alertId).then((data) => {
         reducer = reducer.concat(data);
         this.setState({
@@ -39,7 +39,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.transactions_current_datetime);
     return (
       <BrowserRouter>
         <div className="app">
