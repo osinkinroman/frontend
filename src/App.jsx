@@ -6,7 +6,8 @@ import Statistics from "./components/Statistics";
 import "./App.scss";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Footer from "./components/Footer";
-import "./example.json";
+import "./alerts_datestamp.json";
+import "./transactions_current_datetime.json";
 
 class App extends React.Component {
   constructor(props) {
@@ -21,12 +22,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const data = require("./example.json");
-    const stats = require("./statistics.json");
+    const data = require("./alerts_datestamp.json");
+    const stats = require("./transactions_current_datetime.json");
     this.setState({
       isLoaded: true,
       alerts_datestamp: data.alerts_datestamp,
-      transactions_current_datetime: data.transactions_current_datetime,
+      transactions_current_datetime: stats.transactions_current_datetime,
       chartsInfo: stats.transactions_current_datetime,
     });
   }
@@ -60,8 +61,8 @@ class App extends React.Component {
               </Route>
             </Switch>
           </main>
+          <Footer />
         </div>
-        <Footer />
       </BrowserRouter>
     );
   }

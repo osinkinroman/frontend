@@ -6,6 +6,7 @@ import {
   Inject,
   Filter,
   Sort,
+  Page,
 } from "@syncfusion/ej2-react-grids";
 
 const Analytics = ({
@@ -18,6 +19,8 @@ const Analytics = ({
   const FilterSettingsModel = {
     type: "Menu",
   };
+  const PageSettingsModel = { pageSize: 4 };
+
   if (error) {
     return <p>Error {error.message}</p>;
   } else if (!isLoaded) {
@@ -35,8 +38,10 @@ const Analytics = ({
             allowTextWrap={true}
             allowFiltering={true}
             allowSorting={true}
+            allowPaging={true}
             filterSettings={FilterSettingsModel}
             textWrapSettings={TextWrapSettingsModel}
+            pageSettings={PageSettingsModel}
           >
             <ColumnsDirective>
               <ColumnDirective
@@ -60,7 +65,7 @@ const Analytics = ({
                 width="30"
               />
             </ColumnsDirective>
-            <Inject services={[Filter, Sort]} />
+            <Inject services={[Filter, Sort, Page]} />
           </GridComponent>
         </div>
         <div className="secondTable" style={{ margin: "5%" }}>
@@ -74,6 +79,8 @@ const Analytics = ({
             allowSorting={true}
             filterSettings={FilterSettingsModel}
             textWrapSettings={TextWrapSettingsModel}
+            allowPaging={true}
+            pageSettings={PageSettingsModel}
           >
             <ColumnsDirective>
               <ColumnDirective
@@ -123,7 +130,7 @@ const Analytics = ({
                 width="30"
               />
             </ColumnsDirective>
-            <Inject services={[Filter, Sort]} />
+            <Inject services={[Filter, Sort, Page]} />
           </GridComponent>
         </div>
       </div>
