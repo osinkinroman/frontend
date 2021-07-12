@@ -8,6 +8,8 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Footer from "./components/Footer";
 import "./alerts_datestamp.json";
 import "./transactions_current_datetime.json";
+import fetchTransactions from "./api/fetchTransactions";
+import fetchAlerts from "./api/fetchAlerts";
 
 class App extends React.Component {
   constructor(props) {
@@ -17,22 +19,27 @@ class App extends React.Component {
       isLoaded: false,
       alerts_datestamp: [],
       transactions_current_datetime: [],
-      chartsInfo: [],
     };
   }
 
-  componentDidMount() {
-    const data = require("./alerts_datestamp.json");
-    const stats = require("./transactions_current_datetime.json");
+  async componentDidMount() {
     this.setState({
       isLoaded: true,
-      alerts_datestamp: data.alerts_datestamp,
-      transactions_current_datetime: stats.transactions_current_datetime,
-      chartsInfo: stats.transactions_current_datetime,
+      alerts_datestamp: await fetchAlerts(),
+    });
+    let reducer = [];
+    this.state.alerts_datestamp.map((item) => {
+      fetchTransactions(item.alertId).then((data) => {
+        reducer = reducer.concat(data);
+        this.setState({
+          transactions_current_datetime: reducer,
+        });
+      });
     });
   }
 
   render() {
+    console.log(this.state.transactions_current_datetime);
     return (
       <BrowserRouter>
         <div className="app">
@@ -56,7 +63,7 @@ class App extends React.Component {
               <Route path="/statistics">
                 <Statistics
                   alerts_datestamp={this.state.alerts_datestamp}
-                  chartsInfo={this.state.chartsInfo}
+                  chartsInfo={this.state.transactions_current_datetime}
                 />
               </Route>
             </Switch>

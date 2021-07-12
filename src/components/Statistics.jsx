@@ -6,7 +6,6 @@ import {
   BarChart,
   XAxis,
   YAxis,
-  Legend,
   CartesianGrid,
   Bar,
 } from "recharts";
@@ -20,7 +19,7 @@ const Statistics = ({ alerts_datestamp, chartsInfo }) => {
     (currentItem, nextItem) =>
       currentItem.consideration - nextItem.consideration
   );
-  console.log(data);
+
   return (
     <div className="statistics">
       <div className="pieChart" style={{ margin: "5%" }}>
@@ -32,7 +31,7 @@ const Statistics = ({ alerts_datestamp, chartsInfo }) => {
             nameKey="alertType"
             cx="50%"
             cy="50%"
-            outerRadius={100}
+            outerRadius={80}
             fill="#8884d8"
             label
           />
