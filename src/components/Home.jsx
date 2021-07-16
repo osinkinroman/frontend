@@ -66,7 +66,7 @@ const Home = () => {
         <div>
           <p>Загрузка файла транзакций: </p>
           <input type="file" name="file" onChange={changeHandler} />
-          {isSelected ? <div></div> : <p></p>}
+
           <div>
             <button onClick={handleSubmissionTransactions}>Отправить</button>
           </div>
@@ -74,7 +74,7 @@ const Home = () => {
         <div>
           <p>Загрузка файла c ценами: </p>
           <input type="file" name="file" onChange={changeHandler} />
-          {isSelected ? <div></div> : <p></p>}
+
           <div>
             <button onClick={handleSubmissionPrices}>Отправить</button>
           </div>
