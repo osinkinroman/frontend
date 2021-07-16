@@ -1,4 +1,4 @@
-const fetchTransactions = async (alertId) => {
+const getTransactions = async (alertId) => {
   const response = await fetch(
     `http://130.61.51.1/api/transactions?alertId=${alertId}`
   );
@@ -8,4 +8,4 @@ const fetchTransactions = async (alertId) => {
   return data;
 };
 
-export default fetchTransactions;
+export default getTransactions;

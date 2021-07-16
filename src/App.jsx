@@ -6,10 +6,17 @@ import Statistics from "./components/Statistics";
 import "./App.scss";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Footer from "./components/Footer";
-import "./alerts_datestamp.json";
-import "./transactions_current_datetime.json";
-import fetchTransactions from "./api/fetchTransactions";
-import fetchAlerts from "./api/fetchAlerts";
+import getTransactions from "./api/getTransactions";
+import getAlerts from "./api/getAlerts";
+import {
+  progressBarFetch,
+  setOriginalFetch,
+  ProgressBar,
+} from "react-fetch-progressbar";
+
+/*Переопределение параметров для ProgressBar*/
+setOriginalFetch(window.fetch);
+window.fetch = progressBarFetch;
 
 class App extends React.Component {
   constructor(props) {
@@ -23,13 +30,15 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
+    /*Запрос для alerts*/
     this.setState({
       isLoaded: true,
-      alerts_datestamp: await fetchAlerts(),
+      alerts_datestamp: await getAlerts(),
     });
+    /*Запрос для transactions с учетом alerts*/
     let reducer = [];
     this.state.alerts_datestamp.forEach((item) => {
-      fetchTransactions(item.alertId).then((data) => {
+      getTransactions(item.alertId).then((data) => {
         reducer = reducer.concat(data);
         this.setState({
           transactions_current_datetime: reducer,
@@ -44,6 +53,7 @@ class App extends React.Component {
         <div className="app">
           <Header />
           <main className="main">
+            <ProgressBar />
             <Switch>
               <Redirect from="/" to="/home" exact />
               <Route path="/home">
@@ -61,6 +71,8 @@ class App extends React.Component {
               </Route>
               <Route path="/statistics">
                 <Statistics
+                  error={this.state.error}
+                  isLoaded={this.state.isLoaded}
                   alerts_datestamp={this.state.alerts_datestamp}
                   chartsInfo={this.state.transactions_current_datetime}
                 />

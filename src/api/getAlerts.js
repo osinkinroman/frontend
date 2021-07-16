@@ -1,4 +1,4 @@
-const fetchAlerts = async () => {
+const getAlerts = async () => {
   const response = await fetch(`http://130.61.51.1/api/alerts`);
 
   const data = await response.json();
@@ -6,4 +6,4 @@ const fetchAlerts = async () => {
   return data;
 };
 
-export default fetchAlerts;
+export default getAlerts;
