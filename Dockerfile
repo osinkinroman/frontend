@@ -1,5 +1,5 @@
 FROM node:10.24 AS build # You can correct the version according to the one you use
-ARG app_version=0.0.0
+ARG app_version=0.1.0
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends make build-essential
 WORKDIR /home/node
