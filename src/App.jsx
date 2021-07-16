@@ -6,8 +6,17 @@ import Statistics from "./components/Statistics";
 import "./App.scss";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Footer from "./components/Footer";
-import "./alerts_datestamp.json";
-import "./transactions_current_datetime.json";
+import getTransactions from "./api/getTransactions";
+import getAlerts from "./api/getAlerts";
+import {
+  progressBarFetch,
+  setOriginalFetch,
+  ProgressBar,
+} from "react-fetch-progressbar";
+
+/*Переопределение параметров для ProgressBar*/
+setOriginalFetch(window.fetch);
+window.fetch = progressBarFetch;
 
 class App extends React.Component {
   constructor(props) {
@@ -17,18 +26,24 @@ class App extends React.Component {
       isLoaded: false,
       alerts_datestamp: [],
       transactions_current_datetime: [],
-      chartsInfo: [],
     };
   }
 
-  componentDidMount() {
-    const data = require("./alerts_datestamp.json");
-    const stats = require("./transactions_current_datetime.json");
+  async componentDidMount() {
+    /*Запрос для alerts*/
     this.setState({
       isLoaded: true,
-      alerts_datestamp: data.alerts_datestamp,
-      transactions_current_datetime: stats.transactions_current_datetime,
-      chartsInfo: stats.transactions_current_datetime,
+      alerts_datestamp: await getAlerts(),
+    });
+    /*Запрос для transactions с учетом alerts*/
+    let reducer = [];
+    this.state.alerts_datestamp.forEach((item) => {
+      getTransactions(item.alertId).then((data) => {
+        reducer = reducer.concat(data);
+        this.setState({
+          transactions_current_datetime: reducer,
+        });
+      });
     });
   }
 
@@ -38,6 +53,7 @@ class App extends React.Component {
         <div className="app">
           <Header />
           <main className="main">
+            <ProgressBar />
             <Switch>
               <Redirect from="/" to="/home" exact />
               <Route path="/home">
@@ -55,8 +71,10 @@ class App extends React.Component {
               </Route>
               <Route path="/statistics">
                 <Statistics
+                  error={this.state.error}
+                  isLoaded={this.state.isLoaded}
                   alerts_datestamp={this.state.alerts_datestamp}
-                  chartsInfo={this.state.chartsInfo}
+                  chartsInfo={this.state.transactions_current_datetime}
                 />
               </Route>
             </Switch>

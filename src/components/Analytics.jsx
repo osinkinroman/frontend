@@ -1,4 +1,4 @@
-import React from "react";
+import { React } from "react";
 import {
   GridComponent,
   ColumnDirective,
@@ -15,16 +15,24 @@ const Analytics = ({
   alerts_datestamp,
   transactions_current_datetime,
 }) => {
+  /*Настройки таблиц*/
   const TextWrapSettingsModel = { wrapMode: "Content" };
   const FilterSettingsModel = {
     type: "Menu",
   };
-  const PageSettingsModel = { pageSize: 4 };
+  const PageSettingsModel = { pageSize: 5 };
 
+  /*Рендер*/
   if (error) {
     return <p>Error {error.message}</p>;
   } else if (!isLoaded) {
-    return <p> Loading...</p>;
+    return (
+      <p>
+        {" "}
+        Извините, но процесс “Анализ транзакций и создание оповещений” ещё не
+        завершился
+      </p>
+    );
   } else {
     return (
       <div className="analytics">
